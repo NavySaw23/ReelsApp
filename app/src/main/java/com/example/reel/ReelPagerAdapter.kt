@@ -14,4 +14,12 @@ class ReelPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return ReelFragment.newInstance(videoItems[position])
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun containsItem(itemId: Long): Boolean {
+        return itemId < itemCount
+    }
 }

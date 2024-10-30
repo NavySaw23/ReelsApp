@@ -20,13 +20,24 @@ class MainActivity : FragmentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Check Google Play Services
         checkGooglePlayServices()
-
-        // Initialize Firebase Database with correct URL
         database = FirebaseDatabase.getInstance("https://reelsapp-81e28-default-rtdb.asia-southeast1.firebasedatabase.app").reference
-
         fetchVideosFromFirebase()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCurrentReelFragment()?.resumeVideo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        getCurrentReelFragment()?.pauseVideo()
+    }
+
+    private fun getCurrentReelFragment(): ReelFragment? {
+        val currentItem = binding.viewPager.currentItem
+        return supportFragmentManager.findFragmentByTag("f$currentItem") as? ReelFragment
     }
 
     private fun checkGooglePlayServices() {
