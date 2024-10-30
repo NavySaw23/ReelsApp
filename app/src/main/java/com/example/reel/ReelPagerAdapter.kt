@@ -6,12 +6,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ReelPagerAdapter(
     fragmentActivity: FragmentActivity,
-    private val videoUrls: List<String>
+    private val videoItems: List<VideoItem>
 ) : FragmentStateAdapter(fragmentActivity) {
 
-    override fun getItemCount(): Int = videoUrls.size
+    override fun getItemCount(): Int = videoItems.size
 
     override fun createFragment(position: Int): Fragment {
-        return ReelFragment.newInstance(videoUrls[position])
+        return ReelFragment.newInstance(videoItems[position])
     }
 }
